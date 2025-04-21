@@ -8,13 +8,54 @@
 </head>
 <body>
     <div class="container">
-<h1>Mājas zem €<?= number_format(MAX_PRICE, 0, '.', ' ') ?></h1>
+<h1>Mājas zem €<?= number_format(MAX_PRICE, 0, '.', ' ')?> pilsētā <?=ucfirst(CITY)?></h1>
         
         <?php if ($hasNewListings): ?>
             <div class="notification-banner">
                 <p>New properties have been found and notification email has been sent!</p>
             </div>
         <?php endif; ?>
+
+        <div class="settings-container">
+    <h3>Search Settings</h3>
+    <form method="POST" action="update_settings.php">
+        <div class="form-group">
+            <label for="max_price">Maximum Price (€):</label>
+            <input type="number" id="max_price" name="max_price" value="<?= MAX_PRICE ?>" min="0" step="1000">
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <select id="city" name="city">
+                <option value="aizkraukle" <?= CITY == 'aizkraukle' ? 'selected' : '' ?>>Aizkraukle</option>
+                <option value="aluksne" <?= CITY == 'aluksne' ? 'selected' : '' ?>>Alūksne</option>
+                <option value="balvi" <?= CITY == 'balvi' ? 'selected' : '' ?>>Balvi</option>
+                <option value="bauska" <?= CITY == 'bauska' ? 'selected' : '' ?>>Bauska</option>
+                <option value="cesis" <?= CITY == 'cesis' ? 'selected' : '' ?>>Cēsis</option>
+                <option value="daugavpils" <?= CITY == 'daugavpils' ? 'selected' : '' ?>>Daugavpils</option>
+                <option value="dobele" <?= CITY == 'dobeles' ? 'selected' : '' ?>>Dobele</option>
+                <option value="gulbene" <?= CITY == 'gulbene' ? 'selected' : '' ?>>Gulbene</option>
+                <option value="jekabpils" <?= CITY == 'jekabpils' ? 'selected' : '' ?>>Jēkabpils</option>
+                <option value="jelgava" <?= CITY == 'jelgava' ? 'selected' : '' ?>>Jelgava</option>
+                <option value="kraslava" <?= CITY == 'kraslava' ? 'selected' : '' ?>>Krāslava</option>
+                <option value="kuldiga" <?= CITY == 'kuldiga' ? 'selected' : '' ?>>Kuldīga</option>
+                <option value="liepaja" <?= CITY == 'liepaja' ? 'selected' : '' ?>>Liepāja</option>
+                <option value="limbazi" <?= CITY == 'limbazi' ? 'selected' : '' ?>>Limbaži</option>
+                <option value="ludza" <?= CITY == 'ludza' ? 'selected' : '' ?>>Ludza</option>
+                <option value="madona" <?= CITY == 'madona' ? 'selected' : '' ?>>Madona</option>
+                <option value="ogre" <?= CITY == 'ogre' ? 'selected' : '' ?>>Ogre</option>
+                <option value="preili" <?= CITY == 'preili' ? 'selected' : '' ?>>Preiļi</option>
+                <option value="rezekne" <?= CITY == 'rezekne' ? 'selected' : '' ?>>Rēzekne</option>
+                <option value="saldus" <?= CITY == 'saldus' ? 'selected' : '' ?>>Saldus</option>
+                <option value="talsi" <?= CITY == 'talsi' ? 'selected' : '' ?>>Talsi</option>
+                <option value="tukums" <?= CITY == 'tukums' ? 'selected' : '' ?>>Tukums</option>
+                <option value="valka" <?= CITY == 'valka' ? 'selected' : '' ?>>Valka</option>
+                <option value="valmiera" <?= CITY == 'valmiera' ? 'selected' : '' ?>>Valmiera</option>
+                <option value="ventspils" <?= CITY == 'ventspils' ? 'selected' : '' ?>>Ventspils</option>
+            </select>
+        </div>
+        <button type="submit" class="settings-button">Update Settings</button>
+    </form>
+</div>
         
         <div class="sort-controls">
             <form action="" method="get">

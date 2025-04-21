@@ -1,10 +1,16 @@
 <?php
 declare(strict_types=1);
 
-const MAX_PRICE = 50000;
-const SOURCE_URL = "https://www.ss.lv/lv/real-estate/homes-summer-residences/preili-and-reg/";
-const BASE_URL = "https://www.ss.lv";
-const DATA_FILE = "listings_data.json";
+$savedPreferences = [];
+if (file_exists('user_preferences.json')) {
+    $savedPreferences = json_decode(file_get_contents('user_preferences.json'), true) ?: [];
+}
+
+define('MAX_PRICE', $savedPreferences['max_price'] ?? 50000);
+define('CITY', $savedPreferences['city'] ?? 'preili');
+define('SOURCE_URL', "https://www.ss.lv/lv/real-estate/homes-summer-residences/" . CITY . "-and-reg/");
+define('BASE_URL', "https://www.ss.lv");
+define('DATA_FILE', "listings_data.json");
 
 function fetchUrl(string $url): string {
     $ch = curl_init($url);
@@ -206,7 +212,7 @@ function sendNotificationEmail(array $newListings): void {
     $headers = [
         'MIME-Version: 1.0',
         'Content-type: text/html; charset=utf-8',
-        'From: Property Notifier <noreply@yourdomain.com>'
+        'From: Property Notifier <noreply@yourdodomain.com>'
     ];
     
     mail($to, $subject, $message, implode("\r\n", $headers));
